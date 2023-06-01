@@ -1,13 +1,11 @@
 package com.cvpersonal.models;
 
-import java.util.GregorianCalendar;
-
-public class Education {
+public class Tool {
 
     private String id;
-    private String degree;
+    private String name;
     private String description;
-    private String establishment;
     private String logo;
     private Boolean isDelete;
+
 }
