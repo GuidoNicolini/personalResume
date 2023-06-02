@@ -9,17 +9,14 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
-@Table(name = "social_media")
+import javax.persistence.*;
+@Table(name = "social_medias")
+@Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-@SQLDelete(sql = "UPDATE social_media SET is_delete = true WHERE id=?")
+@SQLDelete(sql = "UPDATE social_medias SET is_delete = true WHERE id=?")
 @Where(clause = "is_delete=false")
 public class SocialMedia {
     @Id
@@ -31,4 +28,7 @@ public class SocialMedia {
     private String logo;
     @Column(name = "is_delete")
     private Boolean isDelete;
+
+    @OneToOne(mappedBy = "socialMedia")
+    private PersonalInformation personalInformation;
 }

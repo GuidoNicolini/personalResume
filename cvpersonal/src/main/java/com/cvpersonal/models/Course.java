@@ -8,12 +8,10 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.GregorianCalendar;
-@Table(name = "course")
+@Entity
+@Table(name = "courses")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter

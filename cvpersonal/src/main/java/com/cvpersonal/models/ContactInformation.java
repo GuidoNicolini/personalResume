@@ -8,13 +8,10 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.GregorianCalendar;
 
-@Table(name = "contact_information")
+@Entity(name = "contact_information")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -31,4 +28,6 @@ public class ContactInformation {
     private String phoneNumber;
     @Column(name = "is_delete")
     private Boolean isDelete;
+    @OneToOne(mappedBy = "contactInformation")
+    private PersonalInformation personalInformation;
 }

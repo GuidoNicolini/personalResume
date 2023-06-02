@@ -8,18 +8,15 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.List;
-
-@Table(name = "profile")
+@Table(name = "profiles")
+@Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-@SQLDelete(sql = "UPDATE profile SET is_delete = true WHERE id=?")
+@SQLDelete(sql = "UPDATE profiles SET is_delete = true WHERE id=?")
 @Where(clause = "is_delete=false")
 public class Profile {
     @Id
