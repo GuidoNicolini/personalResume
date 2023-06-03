@@ -5,11 +5,15 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.validation.constraints.NotBlank;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Setter
 @Getter
 public class ContactInformationDto {
+    @NotBlank
     private String mail;
+    @NotBlank
     private String phoneNumber;
 }

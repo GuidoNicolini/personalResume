@@ -6,12 +6,16 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.validation.constraints.NotBlank;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Setter
 @Getter
 public class SocialMediaDto {
-    private String link;
+    @NotBlank
     private SocialMediaEnum name;
+    @NotBlank
+    private String link;
     private String logo;
 }
