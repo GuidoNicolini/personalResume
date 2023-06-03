@@ -10,4 +10,6 @@ import lombok.Setter;
 @Setter
 @Getter
 public class ProfileDto {
+    private String name;
+    private String cv;
 }

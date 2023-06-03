@@ -10,4 +10,7 @@ import lombok.Setter;
 @Setter
 @Getter
 public class SkillDto {
+    private String name;
+    private String description;
+    private String logo;
 }

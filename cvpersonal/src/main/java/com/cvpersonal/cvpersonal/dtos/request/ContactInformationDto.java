@@ -10,4 +10,6 @@ import lombok.Setter;
 @Setter
 @Getter
 public class ContactInformationDto {
+    private String mail;
+    private String phoneNumber;
 }

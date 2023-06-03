@@ -10,4 +10,8 @@ import lombok.Setter;
 @Setter
 @Getter
 public class EducationDto {
+    private String degree;
+    private String description;
+    private String establishment;
+    private String logo;
 }
