@@ -1,6 +1,6 @@
 package com.cvpersonal.cvpersonal.models;
 
-import com.cvpersonal.enums.SocialMediaEnum;
+import com.cvpersonal.cvpersonal.enums.SocialMediaEnum;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
