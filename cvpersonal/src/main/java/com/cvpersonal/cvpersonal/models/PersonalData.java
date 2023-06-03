@@ -1,4 +1,4 @@
-package com.cvpersonal.models;
+package com.cvpersonal.cvpersonal.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,23 +11,28 @@ import org.hibernate.annotations.Where;
 import javax.persistence.*;
 import java.util.GregorianCalendar;
 
-@Entity(name = "contact_information")
+@Table(name = "personal_data")
+@Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-@SQLDelete(sql = "UPDATE contact_information SET is_delete = true WHERE id=?")
+@SQLDelete(sql = "UPDATE personal_data SET is_delete = true WHERE id=?")
 @Where(clause = "is_delete=false")
-public class ContactInformation {
+public class PersonalData {
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
-    private String mail;
-    @Column(name = "phone_number")
-    private String phoneNumber;
+    private String name;
+    @Column(name = "last_name")
+    private String lastName;
+    @Column(name = "date_of_birth")
+    private GregorianCalendar dateOfBirth;
+    private String state;
+    private String city;
     @Column(name = "is_delete")
     private Boolean isDelete;
-    @OneToOne(mappedBy = "contactInformation")
+    @OneToOne(mappedBy = "personalData")
     private PersonalInformation personalInformation;
 }

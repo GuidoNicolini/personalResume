@@ -1,4 +1,4 @@
-package com.cvpersonal.models;
+package com.cvpersonal.cvpersonal.models;
 
 import com.cvpersonal.enums.SocialMediaEnum;
 import lombok.AllArgsConstructor;
