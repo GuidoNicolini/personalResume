@@ -16,7 +16,7 @@ import java.util.GregorianCalendar;
 @NoArgsConstructor
 @Getter
 @Setter
-@SQLDelete(sql = "UPDATE course SET is_delete = true WHERE id=?")
+@SQLDelete(sql = "UPDATE courses SET is_delete = true WHERE id=?")
 @Where(clause = "is_delete=false")
 
 public class Course {
@@ -31,4 +31,8 @@ public class Course {
     private String logo;
     @Column(name = "is_delete")
     private Boolean isDelete;
+
+    @ManyToOne
+    @JoinColumn(name = "profile_id")
+    private Profile profile;
 }

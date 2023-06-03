@@ -27,6 +27,9 @@ public class Tool {
     private String logo;
     @Column(name = "is_delete")
     private Boolean isDelete;
+    @ManyToOne
+    @JoinColumn(name = "profile_id")
+    private Profile profile;
 
 }
 
