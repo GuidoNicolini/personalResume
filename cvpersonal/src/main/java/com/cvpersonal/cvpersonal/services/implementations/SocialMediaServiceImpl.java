@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,6 +25,7 @@ public class SocialMediaServiceImpl implements SocialMediaService {
     @Autowired
     private Verifier verifier;
     @Override
+    @Transactional
     public SocialMedia createSocialMedia(SocialMediaDto socialMediaDto) {
         SocialMedia socialMedia = modelMapper.map(socialMediaDto,SocialMedia.class);
 
@@ -35,6 +37,7 @@ public class SocialMediaServiceImpl implements SocialMediaService {
     }
 
     @Override
+    @Transactional
     public SocialMedia getSocialMediaById(String id) {
         verifier.IdVerification(id);
 
@@ -43,11 +46,13 @@ public class SocialMediaServiceImpl implements SocialMediaService {
     }
 
     @Override
+    @Transactional
     public List<SocialMedia> getAllSocialMedia() {
         return repository.findAll();
     }
 
     @Override
+    @Transactional
     public SocialMedia updateSocialMedia(SocialMediaDto socialMediaDto, String id) {
         verifier.IdVerification(id);
 
@@ -63,6 +68,7 @@ public class SocialMediaServiceImpl implements SocialMediaService {
     }
 
     @Override
+    @Transactional
     public SocialMedia deleteSocialMedia(String id) {
         verifier.IdVerification(id);
 

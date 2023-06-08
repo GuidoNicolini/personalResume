@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,6 +26,7 @@ public class ToolServiceImpl implements ToolService {
     private Verifier verifier;
 
     @Override
+    @Transactional
     public Tool createTool(ToolDto toolDto) {
 
         Tool tool = modelMapper.map(toolDto,Tool.class);
@@ -38,6 +40,7 @@ public class ToolServiceImpl implements ToolService {
     }
 
     @Override
+    @Transactional
     public Tool getToolById(String id) {
         verifier.IdVerification(id);
 
@@ -46,11 +49,13 @@ public class ToolServiceImpl implements ToolService {
     }
 
     @Override
+    @Transactional
     public List<Tool> getAllTool() {
         return repository.findAll();
     }
 
     @Override
+    @Transactional
     public Tool updateTool(ToolDto toolDto, String id) {
         verifier.IdVerification(id);
 
@@ -66,6 +71,7 @@ public class ToolServiceImpl implements ToolService {
     }
 
     @Override
+    @Transactional
     public Tool deleteTool(String id) {
         verifier.IdVerification(id);
 

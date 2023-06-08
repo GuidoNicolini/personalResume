@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
+import javax.transaction.Transactional;
 import java.util.Optional;
 
 @Service
@@ -24,6 +25,7 @@ public class PersonalDataServiceImpl implements PersonalDataService {
     @Autowired
     private Verifier verifier;
     @Override
+    @Transactional
     public PersonalData createPersonalData(PersonalDataDto personalDataDto) {
         PersonalData personalData = modelMapper.map(personalDataDto,PersonalData.class);
 
@@ -35,6 +37,7 @@ public class PersonalDataServiceImpl implements PersonalDataService {
     }
 
     @Override
+    @Transactional
     public PersonalData getPersonalDataById(String id) {
         verifier.IdVerification(id);
 
@@ -43,6 +46,7 @@ public class PersonalDataServiceImpl implements PersonalDataService {
     }
 
     @Override
+    @Transactional
     public PersonalData updatePersonalData(PersonalDataDto personalDataDto, String id) {
         verifier.IdVerification(id);
 
@@ -58,6 +62,7 @@ public class PersonalDataServiceImpl implements PersonalDataService {
     }
 
     @Override
+    @Transactional
     public PersonalData deletePersonalData(String id) {
         verifier.IdVerification(id);
 

@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,6 +27,7 @@ public class WorkExperienceServiceImpl implements WorkExperienceService {
     private Verifier verifier;
 
     @Override
+    @Transactional
     public WorkExperience createWorkExperience(WorkExperienceDto workExperienceDto) {
 
         WorkExperience workExperience = modelMapper.map(workExperienceDto,WorkExperience.class);
@@ -38,6 +40,7 @@ public class WorkExperienceServiceImpl implements WorkExperienceService {
     }
 
     @Override
+    @Transactional
     public WorkExperience getWorkExperienceById(String id) {
         verifier.IdVerification(id);
 
@@ -46,11 +49,13 @@ public class WorkExperienceServiceImpl implements WorkExperienceService {
     }
 
     @Override
+    @Transactional
     public List<WorkExperience> getAllWorkExperience() {
         return repository.findAll();
     }
 
     @Override
+    @Transactional
     public WorkExperience updateWorkExperience(WorkExperienceDto workExperienceDto, String id) {
         verifier.IdVerification(id);
 
@@ -66,6 +71,7 @@ public class WorkExperienceServiceImpl implements WorkExperienceService {
     }
 
     @Override
+    @Transactional
     public WorkExperience deleteWorkExperience(String id) {
         verifier.IdVerification(id);
 

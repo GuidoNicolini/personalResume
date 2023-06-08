@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,6 +26,7 @@ public class CourseServiceImpl implements CourseService {
     @Autowired
     private Verifier verifier;
     @Override
+    @Transactional
     public Course createCourse(CourseDto courseDto) {
         Course course = modelMapper.map(courseDto,Course.class);
 
@@ -36,6 +38,7 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
+    @Transactional
     public Course getCourseById(String id) {
         verifier.IdVerification(id);
 
@@ -44,11 +47,13 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
+    @Transactional
     public List<Course> getAllCourse() {
         return repository.findAll();
     }
 
     @Override
+    @Transactional
     public Course updateCourse(CourseDto courseDto, String id) {
         verifier.IdVerification(id);
 
@@ -64,6 +69,7 @@ public class CourseServiceImpl implements CourseService {
         }
 
     @Override
+    @Transactional
     public Course deleteCourse(String id) {
         verifier.IdVerification(id);
 

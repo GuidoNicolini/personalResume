@@ -10,6 +10,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import javax.persistence.EntityNotFoundException;
+import javax.transaction.Transactional;
 import java.util.Optional;
 
 @Service
@@ -24,6 +25,7 @@ public class ContactInformationServiceImpl implements ContactInformationService 
     private Verifier verifier;
 
     @Override
+    @Transactional
     public ContactInformation createContactInformation(ContactInformationDto contactInformationDto) {
 
         ContactInformation contactInformation = modelMapper.map(contactInformationDto,ContactInformation.class);
@@ -36,6 +38,7 @@ public class ContactInformationServiceImpl implements ContactInformationService 
     }
 
     @Override
+    @Transactional
     public ContactInformation getContactInformationById(String id) {
 
         verifier.IdVerification(id);
@@ -47,6 +50,7 @@ public class ContactInformationServiceImpl implements ContactInformationService 
 
 
     @Override
+    @Transactional
     public ContactInformation updateContactInformation(ContactInformationDto contactInformationDto, String id) {
 
         verifier.IdVerification(id);
@@ -64,6 +68,7 @@ public class ContactInformationServiceImpl implements ContactInformationService 
     }
 
     @Override
+    @Transactional
     public ContactInformation deleteContactInformation(String id) {
 
         verifier.IdVerification(id);

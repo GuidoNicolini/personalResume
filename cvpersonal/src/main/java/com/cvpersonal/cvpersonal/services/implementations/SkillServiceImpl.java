@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,6 +25,7 @@ public class SkillServiceImpl implements SkillService {
     @Autowired
     private Verifier verifier;
     @Override
+    @Transactional
     public Skill createSkill(SkillDto skillDto) {
         Skill skill = modelMapper.map(skillDto,Skill.class);
 
@@ -35,6 +37,7 @@ public class SkillServiceImpl implements SkillService {
     }
 
     @Override
+    @Transactional
     public Skill getSkillById(String id) {
         verifier.IdVerification(id);
 
@@ -43,11 +46,13 @@ public class SkillServiceImpl implements SkillService {
     }
 
     @Override
+    @Transactional
     public List<Skill> getAllSkill() {
         return repository.findAll();
     }
 
     @Override
+    @Transactional
     public Skill updateSkill(SkillDto skillDto, String id) {
         verifier.IdVerification(id);
 
@@ -63,6 +68,7 @@ public class SkillServiceImpl implements SkillService {
     }
 
     @Override
+    @Transactional
     public Skill deleteSkill(String id) {
         verifier.IdVerification(id);
 

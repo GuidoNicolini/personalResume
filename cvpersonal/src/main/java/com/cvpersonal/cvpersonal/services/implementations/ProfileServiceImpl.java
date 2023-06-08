@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,6 +25,7 @@ public class ProfileServiceImpl implements ProfileService {
     @Autowired
     private Verifier verifier;
     @Override
+    @Transactional
     public Profile createProfile(ProfileDto profileDto) {
         Profile profile = modelMapper.map(profileDto,Profile.class);
 
@@ -35,6 +37,7 @@ public class ProfileServiceImpl implements ProfileService {
     }
 
     @Override
+    @Transactional
     public Profile getProfileById(String id) {
         verifier.IdVerification(id);
 
@@ -43,11 +46,13 @@ public class ProfileServiceImpl implements ProfileService {
     }
 
     @Override
+    @Transactional
     public List<Profile> getAllProfile() {
         return repository.findAll();
     }
 
     @Override
+    @Transactional
     public Profile updateProfile(ProfileDto profileDto, String id) {
         verifier.IdVerification(id);
 
@@ -63,6 +68,7 @@ public class ProfileServiceImpl implements ProfileService {
     }
 
     @Override
+    @Transactional
     public Profile deleteProfile(String id) {
         verifier.IdVerification(id);
 
