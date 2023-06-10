@@ -32,7 +32,7 @@ public class PersonalData {
     private String state;
     private String city;
     @Column(name = "is_delete")
-    private Boolean isDelete;
+    private Boolean isDelete = Boolean.FALSE;
     @OneToOne(mappedBy = "personalData")
     private PersonalInformation personalInformation;
 }

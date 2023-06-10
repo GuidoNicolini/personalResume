@@ -27,7 +27,7 @@ public class SocialMedia {
     private SocialMediaEnum name;
     private String logo;
     @Column(name = "is_delete")
-    private Boolean isDelete;
+    private Boolean isDelete = Boolean.FALSE;
 
     @OneToOne(mappedBy = "socialMedia")
     private PersonalInformation personalInformation;

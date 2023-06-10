@@ -37,5 +37,5 @@ public class Profile {
 
     private String cv;
     @Column(name = "is_delete")
-    private Boolean isDelete;
+    private Boolean isDelete = Boolean.FALSE;
 }

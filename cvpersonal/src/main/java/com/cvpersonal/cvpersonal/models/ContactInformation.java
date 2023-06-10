@@ -26,7 +26,7 @@ public class ContactInformation {
     @Column(name = "phone_number")
     private String phoneNumber;
     @Column(name = "is_delete")
-    private Boolean isDelete;
+    private Boolean isDelete = Boolean.FALSE;
     @OneToOne(mappedBy = "contactInformation")
     private PersonalInformation personalInformation;
 }

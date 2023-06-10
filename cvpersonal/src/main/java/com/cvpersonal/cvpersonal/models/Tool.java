@@ -26,7 +26,7 @@ public class Tool {
     private String description;
     private String logo;
     @Column(name = "is_delete")
-    private Boolean isDelete;
+    private Boolean isDelete = Boolean.FALSE;
     @ManyToOne
     @JoinColumn(name = "profile_id")
     private Profile profile;

@@ -35,5 +35,5 @@ public class PersonalInformation {
     @Column(name = "profile_picture")
     private String profilePicture;
     @Column(name = "is_delete")
-    private Boolean isDelete;
+    private Boolean isDelete = Boolean.FALSE;
 }
