@@ -4,7 +4,6 @@ import com.cvpersonal.cvpersonal.dtos.request.ToolDto;
 import com.cvpersonal.cvpersonal.models.Tool;
 import com.cvpersonal.cvpersonal.services.interfaces.ToolService;
 import lombok.AllArgsConstructor;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +19,6 @@ public class ToolController {
 
     @Autowired
     private final ToolService toolService;
-    private final ModelMapper modelMapper;
     @PostMapping
     public ResponseEntity<Tool> createTool(@Valid @RequestBody ToolDto toolDto) {
 
