@@ -24,15 +24,15 @@ public class Profile {
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
     private String name;
-    @OneToMany(fetch = FetchType.EAGER,mappedBy = "profile", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "profile", cascade = CascadeType.ALL)
     private List<WorkExperience> workExperiences;
-    @OneToMany(fetch = FetchType.EAGER,mappedBy = "profile", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "profile", cascade = CascadeType.ALL)
     private List<Education> educations;
-    @OneToMany(fetch = FetchType.EAGER,mappedBy = "profile", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "profile", cascade = CascadeType.ALL)
     private List<Course>  courses;
-    @OneToMany(fetch = FetchType.EAGER,mappedBy = "profile", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "profile", cascade = CascadeType.ALL)
     private List<Skill> skills;
-    @OneToMany(fetch = FetchType.EAGER,mappedBy = "profile", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "profile", cascade = CascadeType.ALL)
     private List<Tool> tools;
 
     private String cv;
