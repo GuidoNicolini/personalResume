@@ -18,11 +18,11 @@ public class SecurityConfig {
     @Bean
     public UserDetailsService userDetailsService(BCryptPasswordEncoder bCryptPasswordEncoder) {
         InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
-        manager.createUser(User.withUsername("GuidoUser")
+        manager.createUser(User.withUsername("GuidoUserPlaceHolder")
                 .password(bCryptPasswordEncoder.encode("Asdasd12"))
                 .roles("USER")
                 .build());
-        manager.createUser(User.withUsername("GuidoAdmin")
+        manager.createUser(User.withUsername("GuidoAdminPlaceHolder")
                 .password(bCryptPasswordEncoder.encode("Asdasd12"))
                 .roles("USER", "ADMIN")
                 .build());
