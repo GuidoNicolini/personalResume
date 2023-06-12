@@ -1,6 +1,7 @@
 package com.cvpersonal.cvpersonal.security.config;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -32,7 +33,14 @@ public class SecurityConfig {
         http.csrf()
                 .disable()
                 .authorizeRequests()
-                .anyRequest().hasAnyRole("USER","ADMIN")
+                .antMatchers(HttpMethod.PATCH)
+                .hasRole("ADMIN")
+                .antMatchers(HttpMethod.PUT)
+                .hasRole("ADMIN")
+                .antMatchers(HttpMethod.DELETE)
+                .hasRole("ADMIN")
+                .antMatchers(HttpMethod.GET)
+                .permitAll()
                 .and()
                 .httpBasic()
                 .and()
@@ -41,6 +49,10 @@ public class SecurityConfig {
 
         return http.build();
     }
+    @Bean
+    public BCryptPasswordEncoder passwordEncoder() {
 
+        return new BCryptPasswordEncoder();
+    }
 
 }
