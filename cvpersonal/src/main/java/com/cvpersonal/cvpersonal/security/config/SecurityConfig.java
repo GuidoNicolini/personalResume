@@ -26,7 +26,7 @@ public class SecurityConfig {
         InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
         manager.createUser(User.withUsername(USERNAME)
                 .password(bCryptPasswordEncoder.encode(PASSWORD))
-                .roles("ADMINS")
+                .roles("ADMIN")
                 .build());
         return manager;
     }
