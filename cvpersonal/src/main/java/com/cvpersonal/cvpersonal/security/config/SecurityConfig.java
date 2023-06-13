@@ -1,5 +1,6 @@
 package com.cvpersonal.cvpersonal.security.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -15,16 +16,17 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true, jsr250Enabled = true)
 public class SecurityConfig {
+
+    @Value("${security.username}")
+    private String USERNAME;
+    @Value("${security.password}")
+    private String PASSWORD;
     @Bean
     public UserDetailsService userDetailsService(BCryptPasswordEncoder bCryptPasswordEncoder) {
         InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
-        manager.createUser(User.withUsername("GuidoUserPlaceHolder")
-                .password(bCryptPasswordEncoder.encode("Asdasd12"))
-                .roles("USER")
-                .build());
-        manager.createUser(User.withUsername("GuidoAdminPlaceHolder")
-                .password(bCryptPasswordEncoder.encode("Asdasd12"))
-                .roles("USER", "ADMIN")
+        manager.createUser(User.withUsername(USERNAME)
+                .password(bCryptPasswordEncoder.encode(PASSWORD))
+                .roles("ADMINS")
                 .build());
         return manager;
     }
