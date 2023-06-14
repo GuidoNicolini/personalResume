@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.validation.constraints.NotBlank;
 import java.util.GregorianCalendar;
 
 @NoArgsConstructor
@@ -17,4 +18,7 @@ public class CourseDto {
     private String description;
     private String establishment;
     private String logo;
+
+    @NotBlank
+    private String idProfile;
 }

@@ -16,4 +16,7 @@ public class ContactInformationDto {
     private String mail;
     @NotBlank
     private String phoneNumber;
+
+    @NotBlank
+    private String idPersonalInformation;
 }

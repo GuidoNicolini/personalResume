@@ -3,6 +3,7 @@ package com.cvpersonal.cvpersonal.services.implementations;
 import com.cvpersonal.cvpersonal.dtos.request.EducationDto;
 import com.cvpersonal.cvpersonal.models.Education;
 import com.cvpersonal.cvpersonal.repositories.EducationRepository;
+import com.cvpersonal.cvpersonal.repositories.ProfileRepository;
 import com.cvpersonal.cvpersonal.services.interfaces.EducationService;
 import com.cvpersonal.cvpersonal.utils.Verifier;
 import lombok.AllArgsConstructor;
@@ -24,16 +25,22 @@ public class EducationServiceImpl implements EducationService {
     private EducationRepository repository;
 
     @Autowired
+    private ProfileRepository profileRepository;
+
+    @Autowired
     private Verifier verifier;
     @Override
     @Transactional
     public Education createEducation(EducationDto educationDto) {
-        Education education = modelMapper.map(educationDto,Education.class);
-
         try {
-            return repository.save(education);
+            if (profileRepository.existsById(educationDto.getIdProfile())) {
+                Education educacion = modelMapper.map(educationDto, Education.class);
+                return repository.save(educacion);
+            }else{
+                throw new IllegalArgumentException("Profile does not exist");
+            }
         } catch (Exception e) {
-            throw new RuntimeException("Failed to create education", e);
+            throw new RuntimeException("Failed to create Educacion", e);
         }
     }
 
@@ -59,7 +66,11 @@ public class EducationServiceImpl implements EducationService {
 
         Education answer = getEducation(id);
 
-        modelMapper.map(educationDto,answer);
+        answer.setDegree(educationDto.getDegree());
+        answer.setDescription(educationDto.getDescription());
+        answer.setEstablishment(educationDto.getEstablishment());
+        answer.setLogo(educationDto.getLogo());
+
 
         try {
             return repository.save(answer);

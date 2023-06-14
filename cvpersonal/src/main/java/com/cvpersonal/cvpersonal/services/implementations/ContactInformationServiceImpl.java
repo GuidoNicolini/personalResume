@@ -3,6 +3,7 @@ package com.cvpersonal.cvpersonal.services.implementations;
 import com.cvpersonal.cvpersonal.dtos.request.ContactInformationDto;
 import com.cvpersonal.cvpersonal.models.ContactInformation;
 import com.cvpersonal.cvpersonal.repositories.ContactInformationRepository;
+import com.cvpersonal.cvpersonal.repositories.PersonalInformationRepository;
 import com.cvpersonal.cvpersonal.services.interfaces.ContactInformationService;
 import com.cvpersonal.cvpersonal.utils.Verifier;
 import lombok.AllArgsConstructor;
@@ -22,18 +23,23 @@ public class ContactInformationServiceImpl implements ContactInformationService 
     private ContactInformationRepository repository;
 
     @Autowired
+    private PersonalInformationRepository personalInformationRepository;
+    @Autowired
     private Verifier verifier;
 
     @Override
     @Transactional
     public ContactInformation createContactInformation(ContactInformationDto contactInformationDto) {
 
-        ContactInformation contactInformation = modelMapper.map(contactInformationDto,ContactInformation.class);
-        
-        try {
-            return repository.save(contactInformation);
-        } catch (Exception e) {
-            throw new RuntimeException("Failed to create contact information", e);
+        if(personalInformationRepository.existsById(contactInformationDto.getIdPersonalInformation())) {
+            try {
+                ContactInformation contactInformation = modelMapper.map(contactInformationDto, ContactInformation.class);
+                return repository.save(contactInformation);
+            } catch (Exception e) {
+                throw new RuntimeException("Failed to create contact information", e);
+            }
+        }else{
+            throw new IllegalArgumentException("Profile does not exist");
         }
     }
 
@@ -57,7 +63,9 @@ public class ContactInformationServiceImpl implements ContactInformationService 
 
         ContactInformation answer = getContactInformation(id);
 
-        modelMapper.map(contactInformationDto,answer);
+        answer.setMail(contactInformationDto.getMail());
+        answer.setPhoneNumber(contactInformationDto.getPhoneNumber());
+
 
         try {
             return repository.save(answer);

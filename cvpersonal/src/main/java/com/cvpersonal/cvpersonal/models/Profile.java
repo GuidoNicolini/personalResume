@@ -1,5 +1,6 @@
 package com.cvpersonal.cvpersonal.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,14 +26,19 @@ public class Profile {
     private String id;
     private String name;
     @OneToMany(mappedBy = "profile", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<WorkExperience> workExperiences;
     @OneToMany(mappedBy = "profile", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Education> educations;
     @OneToMany(mappedBy = "profile", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Course>  courses;
     @OneToMany(mappedBy = "profile", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Skill> skills;
     @OneToMany(mappedBy = "profile", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Tool> tools;
 
     private String cv;

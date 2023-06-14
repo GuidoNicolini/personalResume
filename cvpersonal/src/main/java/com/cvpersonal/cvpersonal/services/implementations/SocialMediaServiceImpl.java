@@ -2,6 +2,7 @@ package com.cvpersonal.cvpersonal.services.implementations;
 
 import com.cvpersonal.cvpersonal.dtos.request.SocialMediaDto;
 import com.cvpersonal.cvpersonal.models.SocialMedia;
+import com.cvpersonal.cvpersonal.repositories.PersonalInformationRepository;
 import com.cvpersonal.cvpersonal.repositories.SocialMediaRepository;
 import com.cvpersonal.cvpersonal.services.interfaces.SocialMediaService;
 import com.cvpersonal.cvpersonal.utils.Verifier;
@@ -23,16 +24,23 @@ public class SocialMediaServiceImpl implements SocialMediaService {
     private SocialMediaRepository repository;
 
     @Autowired
+    private PersonalInformationRepository personalInformationRepository;
+
+    @Autowired
     private Verifier verifier;
     @Override
     @Transactional
     public SocialMedia createSocialMedia(SocialMediaDto socialMediaDto) {
-        SocialMedia socialMedia = modelMapper.map(socialMediaDto,SocialMedia.class);
 
-        try {
-            return repository.save(socialMedia);
-        } catch (Exception e) {
-            throw new RuntimeException("Failed to create social media", e);
+        if(personalInformationRepository.existsById(socialMediaDto.getIdPersonalInformation())) {
+            try {
+                SocialMedia socialMedia = modelMapper.map(socialMediaDto, SocialMedia.class);
+                return repository.save(socialMedia);
+            } catch (Exception e) {
+                throw new RuntimeException("Failed to create social media", e);
+            }
+        }else{
+            throw new IllegalArgumentException("Profile does not exist");
         }
     }
 
@@ -58,7 +66,9 @@ public class SocialMediaServiceImpl implements SocialMediaService {
 
         SocialMedia answer = getSocialMedia(id);
 
-        modelMapper.map(socialMediaDto,answer);
+        answer.setName(socialMediaDto.getName());
+        answer.setLink(socialMediaDto.getLink());
+        answer.setLogo(socialMediaDto.getLogo());
 
         try {
             return repository.save(answer);
