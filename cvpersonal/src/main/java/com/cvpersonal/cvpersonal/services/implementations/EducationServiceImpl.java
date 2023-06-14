@@ -71,7 +71,6 @@ public class EducationServiceImpl implements EducationService {
         answer.setEstablishment(educationDto.getEstablishment());
         answer.setLogo(educationDto.getLogo());
 
-        //modelMapper.map(educationDto,answer);
 
         try {
             return repository.save(answer);
