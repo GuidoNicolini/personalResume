@@ -66,7 +66,12 @@ public class EducationServiceImpl implements EducationService {
 
         Education answer = getEducation(id);
 
-        modelMapper.map(educationDto,answer);
+        answer.setDegree(educationDto.getDegree());
+        answer.setDescription(educationDto.getDescription());
+        answer.setEstablishment(educationDto.getEstablishment());
+        answer.setLogo(educationDto.getLogo());
+
+        //modelMapper.map(educationDto,answer);
 
         try {
             return repository.save(answer);
