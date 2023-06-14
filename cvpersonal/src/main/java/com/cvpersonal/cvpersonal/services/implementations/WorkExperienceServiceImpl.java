@@ -2,6 +2,7 @@ package com.cvpersonal.cvpersonal.services.implementations;
 
 import com.cvpersonal.cvpersonal.dtos.request.WorkExperienceDto;
 import com.cvpersonal.cvpersonal.models.WorkExperience;
+import com.cvpersonal.cvpersonal.repositories.ProfileRepository;
 import com.cvpersonal.cvpersonal.repositories.WorkExperienceRepository;
 import com.cvpersonal.cvpersonal.services.interfaces.WorkExperienceService;
 import com.cvpersonal.cvpersonal.utils.Verifier;
@@ -24,20 +25,30 @@ public class WorkExperienceServiceImpl implements WorkExperienceService {
     private WorkExperienceRepository repository;
 
     @Autowired
+    private ProfileRepository profileRepository;
+
+    @Autowired
     private Verifier verifier;
 
     @Override
     @Transactional
     public WorkExperience createWorkExperience(WorkExperienceDto workExperienceDto) {
 
-        WorkExperience workExperience = modelMapper.map(workExperienceDto,WorkExperience.class);
 
         try {
-            return repository.save(workExperience);
+            if (profileRepository.existsById(workExperienceDto.getIdProfile())) {
+                WorkExperience workExperience = modelMapper.map(workExperienceDto, WorkExperience.class);
+                return repository.save(workExperience);
+            }else{
+                throw new IllegalArgumentException("Profile does not exist");
+            }
         } catch (Exception e) {
             throw new RuntimeException("Failed to create work experience", e);
         }
+
     }
+
+
 
     @Override
     @Transactional
@@ -61,7 +72,7 @@ public class WorkExperienceServiceImpl implements WorkExperienceService {
 
         WorkExperience answer = getWorkExperience(id);
 
-        modelMapper.map(workExperienceDto,answer);
+        modelMapper.map(workExperienceDto, answer);
 
         try {
             return repository.save(answer);
@@ -79,7 +90,7 @@ public class WorkExperienceServiceImpl implements WorkExperienceService {
         try {
             repository.deleteById(id);
             return answer;
-        }catch(Exception e){
+        } catch (Exception e) {
             throw new RuntimeException("Failed to delete work experience", e);
         }
     }

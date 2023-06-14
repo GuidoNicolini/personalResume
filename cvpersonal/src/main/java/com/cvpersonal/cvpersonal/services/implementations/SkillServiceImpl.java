@@ -2,6 +2,8 @@ package com.cvpersonal.cvpersonal.services.implementations;
 
 import com.cvpersonal.cvpersonal.dtos.request.SkillDto;
 import com.cvpersonal.cvpersonal.models.Skill;
+import com.cvpersonal.cvpersonal.models.Skill;
+import com.cvpersonal.cvpersonal.repositories.ProfileRepository;
 import com.cvpersonal.cvpersonal.repositories.SkillRepository;
 import com.cvpersonal.cvpersonal.services.interfaces.SkillService;
 import com.cvpersonal.cvpersonal.utils.Verifier;
@@ -23,16 +25,22 @@ public class SkillServiceImpl implements SkillService {
     private SkillRepository repository;
 
     @Autowired
+    private ProfileRepository profileRepository;
+
+    @Autowired
     private Verifier verifier;
     @Override
     @Transactional
     public Skill createSkill(SkillDto skillDto) {
-        Skill skill = modelMapper.map(skillDto,Skill.class);
-
         try {
-            return repository.save(skill);
+            if (profileRepository.existsById(skillDto.getIdProfile())) {
+                Skill skill = modelMapper.map(skillDto, Skill.class);
+                return repository.save(skill);
+            }else{
+                throw new IllegalArgumentException("Profile does not exist");
+            }
         } catch (Exception e) {
-            throw new RuntimeException("Failed to create skill", e);
+            throw new RuntimeException("Failed to create Skill", e);
         }
     }
 

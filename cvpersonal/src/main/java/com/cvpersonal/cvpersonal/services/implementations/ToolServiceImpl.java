@@ -2,6 +2,8 @@ package com.cvpersonal.cvpersonal.services.implementations;
 
 import com.cvpersonal.cvpersonal.dtos.request.ToolDto;
 import com.cvpersonal.cvpersonal.models.Tool;
+import com.cvpersonal.cvpersonal.models.Tool;
+import com.cvpersonal.cvpersonal.repositories.ProfileRepository;
 import com.cvpersonal.cvpersonal.repositories.ToolRepository;
 import com.cvpersonal.cvpersonal.services.interfaces.ToolService;
 import com.cvpersonal.cvpersonal.utils.Verifier;
@@ -23,18 +25,24 @@ public class ToolServiceImpl implements ToolService {
     private ToolRepository repository;
 
     @Autowired
+    private ProfileRepository profileRepository;
+
+    @Autowired
     private Verifier verifier;
 
     @Override
     @Transactional
     public Tool createTool(ToolDto toolDto) {
 
-        Tool tool = modelMapper.map(toolDto,Tool.class);
-
         try {
-            return repository.save(tool);
+            if (profileRepository.existsById(toolDto.getIdProfile())) {
+                Tool tool = modelMapper.map(toolDto, Tool.class);
+                return repository.save(tool);
+            }else{
+                throw new IllegalArgumentException("Profile does not exist");
+            }
         } catch (Exception e) {
-            throw new RuntimeException("Failed to create tool", e);
+            throw new RuntimeException("Failed to create Tool", e);
         }
         
     }

@@ -18,4 +18,7 @@ public class EducationDto {
     @NotBlank
     private String establishment;
     private String logo;
+
+    @NotBlank
+    private String idProfile;
 }

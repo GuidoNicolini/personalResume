@@ -3,6 +3,7 @@ package com.cvpersonal.cvpersonal.services.implementations;
 import com.cvpersonal.cvpersonal.dtos.request.PersonalDataDto;
 import com.cvpersonal.cvpersonal.models.PersonalData;
 import com.cvpersonal.cvpersonal.repositories.PersonalDataRepository;
+import com.cvpersonal.cvpersonal.repositories.PersonalInformationRepository;
 import com.cvpersonal.cvpersonal.services.interfaces.PersonalDataService;
 import com.cvpersonal.cvpersonal.utils.Verifier;
 import lombok.AllArgsConstructor;
@@ -23,16 +24,23 @@ public class PersonalDataServiceImpl implements PersonalDataService {
     private PersonalDataRepository repository;
 
     @Autowired
+    private PersonalInformationRepository personalInformationRepository;
+
+    @Autowired
     private Verifier verifier;
     @Override
     @Transactional
     public PersonalData createPersonalData(PersonalDataDto personalDataDto) {
-        PersonalData personalData = modelMapper.map(personalDataDto,PersonalData.class);
 
-        try {
-            return repository.save(personalData);
-        } catch (Exception e) {
-            throw new RuntimeException("Failed to create personal data", e);
+        if(personalInformationRepository.existsById(personalDataDto.getIdPersonalInformation())) {
+            try {
+                PersonalData personalData = modelMapper.map(personalDataDto, PersonalData.class);
+                return repository.save(personalData);
+            } catch (Exception e) {
+                throw new RuntimeException("Failed to create personal data", e);
+            }
+        }else{
+            throw new IllegalArgumentException("Profile does not exist");
         }
     }
 

@@ -16,4 +16,7 @@ public class SkillDto {
     private String name;
     private String description;
     private String logo;
+
+    @NotBlank
+    private String idProfile;
 }

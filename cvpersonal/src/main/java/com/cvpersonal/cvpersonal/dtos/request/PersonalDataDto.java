@@ -23,4 +23,7 @@ public class PersonalDataDto {
     private String state;
     @NotBlank
     private String city;
+
+    @NotBlank
+    private String idPersonalInformation;
 }

@@ -2,7 +2,9 @@ package com.cvpersonal.cvpersonal.services.implementations;
 
 import com.cvpersonal.cvpersonal.dtos.request.CourseDto;
 import com.cvpersonal.cvpersonal.models.Course;
+import com.cvpersonal.cvpersonal.models.Course;
 import com.cvpersonal.cvpersonal.repositories.CourseRepository;
+import com.cvpersonal.cvpersonal.repositories.ProfileRepository;
 import com.cvpersonal.cvpersonal.services.interfaces.CourseService;
 import com.cvpersonal.cvpersonal.utils.Verifier;
 import lombok.AllArgsConstructor;
@@ -24,16 +26,22 @@ public class CourseServiceImpl implements CourseService {
     private CourseRepository repository;
 
     @Autowired
+    private ProfileRepository profileRepository;
+
+    @Autowired
     private Verifier verifier;
     @Override
     @Transactional
     public Course createCourse(CourseDto courseDto) {
-        Course course = modelMapper.map(courseDto,Course.class);
-
         try {
-            return repository.save(course);
+            if (profileRepository.existsById(courseDto.getIdProfile())) {
+                Course course = modelMapper.map(courseDto, Course.class);
+                return repository.save(course);
+            }else{
+                throw new IllegalArgumentException("Profile does not exist");
+            }
         } catch (Exception e) {
-            throw new RuntimeException("Failed to create course", e);
+            throw new RuntimeException("Failed to create Course", e);
         }
     }
 

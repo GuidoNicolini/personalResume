@@ -22,4 +22,7 @@ public class WorkExperienceDto {
     private GregorianCalendar initialDate;
     private GregorianCalendar endDate;
     private String logo;
+
+    @NotBlank
+    private String idProfile;
 }

@@ -18,4 +18,7 @@ public class SocialMediaDto {
     @NotBlank
     private String link;
     private String logo;
+
+    @NotBlank
+    private String idPersonalInformation;
 }
