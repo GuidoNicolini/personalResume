@@ -72,7 +72,12 @@ public class WorkExperienceServiceImpl implements WorkExperienceService {
 
         WorkExperience answer = getWorkExperience(id);
 
-        modelMapper.map(workExperienceDto, answer);
+        answer.setJobPosition(workExperienceDto.getJobPosition());
+        answer.setEstablishment(workExperienceDto.getEstablishment());
+        answer.setDescription(workExperienceDto.getDescription());
+        answer.setInitialDate(workExperienceDto.getInitialDate());
+        answer.setEndDate(workExperienceDto.getEndDate());
+        answer.setLogo(workExperienceDto.getLogo());
 
         try {
             return repository.save(answer);

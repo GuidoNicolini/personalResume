@@ -60,7 +60,11 @@ public class PersonalDataServiceImpl implements PersonalDataService {
 
         PersonalData answer = getPersonalData(id);
 
-        modelMapper.map(personalDataDto,answer);
+        answer.setName(personalDataDto.getName());
+        answer.setLastName(personalDataDto.getLastName());
+        answer.setDateOfBirth(personalDataDto.getDateOfBirth());
+        answer.setState(personalDataDto.getState());
+        answer.setCity(personalDataDto.getCity());
 
         try {
             return repository.save(answer);

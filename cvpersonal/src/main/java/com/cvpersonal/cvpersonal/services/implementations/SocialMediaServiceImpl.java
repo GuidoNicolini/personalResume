@@ -66,7 +66,9 @@ public class SocialMediaServiceImpl implements SocialMediaService {
 
         SocialMedia answer = getSocialMedia(id);
 
-        modelMapper.map(socialMediaDto,answer);
+        answer.setName(socialMediaDto.getName());
+        answer.setLink(socialMediaDto.getLink());
+        answer.setLogo(socialMediaDto.getLogo());
 
         try {
             return repository.save(answer);

@@ -69,7 +69,9 @@ public class ToolServiceImpl implements ToolService {
 
         Tool answer = getTool(id);
 
-        modelMapper.map(toolDto,answer);
+        answer.setName(toolDto.getName());
+        answer.setDescription(toolDto.getDescription());
+        answer.setLogo(toolDto.getLogo());
 
         try {
             return repository.save(answer);

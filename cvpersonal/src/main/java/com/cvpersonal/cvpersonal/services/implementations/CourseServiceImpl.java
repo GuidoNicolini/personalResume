@@ -67,7 +67,11 @@ public class CourseServiceImpl implements CourseService {
 
         Course answer = getCourse(id);
 
-        modelMapper.map(courseDto,answer);
+       answer.setName(courseDto.getName());
+       answer.setDate(courseDto.getDate());
+       answer.setDescription(courseDto.getDescription());
+       answer.setEstablishment(courseDto.getEstablishment());
+       answer.setLogo(courseDto.getLogo());
 
         try {
             return repository.save(answer);

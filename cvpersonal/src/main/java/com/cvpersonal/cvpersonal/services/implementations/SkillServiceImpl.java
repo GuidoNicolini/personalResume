@@ -66,7 +66,9 @@ public class SkillServiceImpl implements SkillService {
 
         Skill answer = getSkill(id);
 
-        modelMapper.map(skillDto,answer);
+        answer.setName(skillDto.getName());
+        answer.setDescription(skillDto.getDescription());
+        answer.setLogo(skillDto.getLogo());
 
         try {
             return repository.save(answer);

@@ -63,7 +63,9 @@ public class ContactInformationServiceImpl implements ContactInformationService 
 
         ContactInformation answer = getContactInformation(id);
 
-        modelMapper.map(contactInformationDto,answer);
+        answer.setMail(contactInformationDto.getMail());
+        answer.setPhoneNumber(contactInformationDto.getPhoneNumber());
+
 
         try {
             return repository.save(answer);
