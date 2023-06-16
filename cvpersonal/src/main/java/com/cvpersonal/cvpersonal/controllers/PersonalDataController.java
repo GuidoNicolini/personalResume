@@ -15,6 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 @RestController
 @RequestMapping("/api/personaldata")
+@CrossOrigin("*")
 public class PersonalDataController {
 
     @Autowired

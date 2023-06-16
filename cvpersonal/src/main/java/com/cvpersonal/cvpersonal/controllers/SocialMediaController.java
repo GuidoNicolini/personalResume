@@ -15,6 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 @RestController
 @RequestMapping("/api/socialmedia")
+@CrossOrigin("*")
 public class SocialMediaController {
 
     @Autowired

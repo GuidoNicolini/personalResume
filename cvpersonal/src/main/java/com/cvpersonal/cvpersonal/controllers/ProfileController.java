@@ -14,6 +14,7 @@ import javax.validation.Valid;
 @AllArgsConstructor
 @RestController
 @RequestMapping("/api/profile")
+@CrossOrigin("*")
 public class ProfileController {
 
     @Autowired

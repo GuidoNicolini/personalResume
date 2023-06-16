@@ -16,6 +16,7 @@ import java.util.List;
 @AllArgsConstructor
 @RestController
 @RequestMapping("/api/workexperience")
+@CrossOrigin("*")
 public class WorkExperienceController {
 
     @Autowired

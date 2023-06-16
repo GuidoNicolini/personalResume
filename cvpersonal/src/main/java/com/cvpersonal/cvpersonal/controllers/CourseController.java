@@ -15,6 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 @RestController
 @RequestMapping("/api/course")
+@CrossOrigin("*")
 public class CourseController {
 
     @Autowired

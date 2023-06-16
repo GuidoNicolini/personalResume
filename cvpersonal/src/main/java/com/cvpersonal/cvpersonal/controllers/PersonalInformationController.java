@@ -14,6 +14,7 @@ import javax.validation.Valid;
 @AllArgsConstructor
 @RestController
 @RequestMapping("/api/personalinformation")
+@CrossOrigin("*")
 public class PersonalInformationController {
 
     @Autowired
